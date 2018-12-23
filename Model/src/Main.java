@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 public class Main {
 
     // this class is only for database functionality testing
@@ -11,6 +13,7 @@ public class Main {
         rocky.setDirector("John Avildsen");
         rocky.setDurationTime(122.00);
         rocky.insertToDatabase();
+
 
         //Second Movie
         Movie Interstellar = new Movie(connection);
@@ -59,5 +62,7 @@ public class Main {
         ad1.setUserAge(34);
         ad1.setUserSalary(10000);
         ad1.insertToDatabase();
+
+        ad1.removeMovie("ROCKY");
     }
 }

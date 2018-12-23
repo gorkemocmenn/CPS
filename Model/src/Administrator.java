@@ -62,7 +62,7 @@ public class Administrator {
             int status =  statement.executeUpdate();
             System.out.println(status);
             statement.close();
-            connection.close();
+            //connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class Administrator {
 
 
             statement.close();
-            connection.close();
+            //connection.close();
 
 
         } catch (SQLException e1) {
@@ -90,15 +90,29 @@ public class Administrator {
         try {
             statement = connection.createStatement();
             // move to removedMovies
-            String sql2= "INSERT INTO removedmovies "+
-                    "SELECT * FROM movies"+
-                    "WHERE movies.moviename ="+ moviename;
-            statement.executeUpdate(sql2);
-            String sql = "DELETE FROM movies WHERE moviename ="+moviename;
+            migrateMovie(moviename);
+
+            String sql = "DELETE FROM movies WHERE moviename = '"+moviename+"'";
             statement.executeUpdate(sql);
             statement.close();
-            connection.close();
-            System.out.println( "The User is Deleted!");
+            //connection.close();
+            System.out.println( "The movie is Deleted!");
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            System.out.println( "Something went wrong!, Failure!");
+        }
+    }
+    private void migrateMovie(String moviename){
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            String sql2 = "INSERT INTO removedmovies "+
+                    "SELECT * FROM movies "+
+                    "WHERE moviename = '"+moviename+"'";
+            statement.executeUpdate(sql2);
+            statement.close();
+            //connection.close();
+            System.out.println( "The movie is migrated!");
         } catch (SQLException e1) {
             e1.printStackTrace();
             System.out.println( "Something went wrong!, Failure!");
