@@ -85,4 +85,23 @@ public class Administrator {
         }
         return rs;
     }
+    public void removeMovie(String moviename){
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            // move to removedMovies
+            String sql2= "INSERT INTO removedmovies "+
+                    "SELECT * FROM movies"+
+                    "WHERE movies.moviename ="+ moviename;
+            statement.executeUpdate(sql2);
+            String sql = "DELETE FROM movies WHERE moviename ="+moviename;
+            statement.executeUpdate(sql);
+            statement.close();
+            connection.close();
+            System.out.println( "The User is Deleted!");
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            System.out.println( "Something went wrong!, Failure!");
+        }
+    }
 }

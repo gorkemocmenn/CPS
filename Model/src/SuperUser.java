@@ -68,6 +68,20 @@ public class SuperUser {
         }
         return rs;
     }
+    public void removeAdministrator(String userid){
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            String sql = "DELETE FROM administrators WHERE userid ="+userid;
+            statement.executeUpdate(sql);
+            statement.close();
+            connection.close();
+            System.out.println( "The User is Deleted!");
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            System.out.println( "Something went wrong!, Failure!");
+        }
+    }
 
 
 
