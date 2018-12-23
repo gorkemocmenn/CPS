@@ -85,6 +85,24 @@ public class Administrator {
         }
         return rs;
     }
+    public ResultSet retrieveRemovedMovieData(){
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM removedmovies;";
+            rs = statement.executeQuery(sql);
+
+
+            statement.close();
+            //connection.close();
+
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            System.out.println("Something went wrong ");
+        }
+        return rs;
+    }
     public void removeMovie(String moviename){
         Statement statement = null;
         try {
