@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Administrator {
     DB dbconnection;
@@ -68,5 +66,23 @@ public class Administrator {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public ResultSet retrieveMovieData(){
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM movies;";
+            rs = statement.executeQuery(sql);
+
+
+            statement.close();
+            connection.close();
+
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            System.out.println("Something went wrong ");
+        }
+        return rs;
     }
 }

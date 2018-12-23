@@ -48,6 +48,25 @@ public class SuperUser {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+    public ResultSet retrieveAdministratorData(){
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM administrators;";
+            rs = statement.executeQuery(sql);
+
+
+            statement.close();
+            connection.close();
+
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            System.out.println("Something went wrong ");
+        }
+        return rs;
     }
 
 
